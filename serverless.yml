@@ -52,8 +52,14 @@ functions:
     handler: handler.hello
     events:
       - http:
-          path: /hola-mundo/{name}
+          path: /holamundo/{name}
           method: get
+  greet:
+    handler: handler.greet
+    events:
+      - http:
+          path: /greet
+          method: post
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
