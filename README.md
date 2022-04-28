@@ -6,3 +6,7 @@ sls
 Adding line
 
 Another line
+
+new line
+
+new line
