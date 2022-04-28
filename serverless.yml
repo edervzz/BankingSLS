@@ -62,7 +62,11 @@ functions:
           path: /holamundo/{name}
           method: get
   greet:
+<<<<<<< HEAD
 >>>>>>> a364de4 (Add second func)
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> refs/remotes/origin/main
     handler: handler.greet
     events:
       - http:
@@ -71,7 +75,11 @@ functions:
           method: post          
 =======
           method: post
+<<<<<<< HEAD
 >>>>>>> a364de4 (Add second func)
+=======
+>>>>>>> refs/remotes/origin/main
+>>>>>>> refs/remotes/origin/main
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
