@@ -1,12 +1,16 @@
 'use strict';
 
+const queryString = require("querystring")
+const bodyParser = require("body-parser");
+
+
 module.exports.hello = async (event) => {
   let r = {
     statusCode: 200,
     body: JSON.stringify(
       {
         message: `Hola ${event.pathParameters.name}`,
-        input: event,
+        input: body.name,
       },
       null,
       2
@@ -34,3 +38,23 @@ module.exports.greet = async (event) => {
   return r;
 
 };
+
+module.exports.greet = async (event) => {
+  const jsonData = JSON.parse(event.body)
+  console.log(jsonData);
+  let r = {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: `greet`,
+        input: jsonData,
+      },
+      null,
+      2
+    ),
+  }
+  console.log(r)
+  return r;
+};
+
+

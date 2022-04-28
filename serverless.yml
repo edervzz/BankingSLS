@@ -47,19 +47,31 @@ provider:
 #    - include-me.js
 #    - include-me-dir/**
 
+# Cada función-lambda hace referencia a una función expuesta
 functions:
-  hello:
-    handler: handler.hello
+  hello: # nombre de la lambda
+    handler: handler.hello # archivo.función
     events:
       - http:
+<<<<<<< HEAD
           path: /holamundo/{name}
           method: get
   greet:
+=======
+          path: /hola-mundo/{name} # path url
+          method: get # method
+
+  greet: # nombre de la lambda
+>>>>>>> 38235ac (Macbook changes)
     handler: handler.greet
     events:
       - http:
           path: /greet
+<<<<<<< HEAD
           method: post
+=======
+          method: post          
+>>>>>>> 38235ac (Macbook changes)
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)

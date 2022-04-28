@@ -19,5 +19,8 @@
   "homepage": "https://github.com/edervzz/BankingSLS#readme",
   "devDependencies": {
     "serverless-offline": "^8.7.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0"
   }
 }
