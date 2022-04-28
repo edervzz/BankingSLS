@@ -39,22 +39,5 @@ module.exports.greet = async (event) => {
 
 };
 
-module.exports.greet = async (event) => {
-  const jsonData = JSON.parse(event.body)
-  console.log(jsonData);
-  let r = {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: `greet`,
-        input: jsonData,
-      },
-      null,
-      2
-    ),
-  }
-  console.log(r)
-  return r;
-};
 
 
