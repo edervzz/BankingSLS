@@ -53,15 +53,14 @@ functions:
     handler: handler.hello # archivo.función
     events:
       - http:
-          path: /holamundo/{name}
-          method: get
+          path: /hola-mundo/{name} # path url
+          method: get # method
   greet:
     handler: handler.greet
     events:
       - http:
           path: /greet
           method: post
-          method: post     
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
