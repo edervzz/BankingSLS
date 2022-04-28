@@ -53,15 +53,25 @@ functions:
     handler: handler.hello # archivo.función
     events:
       - http:
+<<<<<<< HEAD
           path: /hola-mundo/{name} # path url
           method: get # method
 
   greet: # nombre de la lambda
+=======
+          path: /holamundo/{name}
+          method: get
+  greet:
+>>>>>>> a364de4 (Add second func)
     handler: handler.greet
     events:
       - http:
           path: /greet
+<<<<<<< HEAD
           method: post          
+=======
+          method: post
+>>>>>>> a364de4 (Add second func)
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
