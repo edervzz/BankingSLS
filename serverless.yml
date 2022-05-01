@@ -1,13 +1,10 @@
 service: serverless-banking
-# app and org for use with dashboard.serverless.com
-#app: your-app-name
-#org: your-org-name
-
-plugins:
-  - serverless-offline
-
 
 frameworkVersion: '3'
+
+plugins:
+  - serverless-offline # primero instalar serverless-offline, con esto podemos deployar nuestra lambda de forma
+
 
 provider:
   name: aws
