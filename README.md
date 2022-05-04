@@ -1,18 +1,45 @@
 # BankingSLS
 Serverless Banking app
 
-sls
+## Instalar serverless vía nodejs
+``` bash
+npm i -g serverless
+```
 
-Adding line
 
-Another line
+## Configurar credenciales
+``` bash
+sls config credentials --provider aws --key <key> --secret <secret>
+# Agregar -o para overwrite
+```
 
-new line
+## Crear proyecto serverless
+``` bash
+sls create --template aws-nodejs --path <my_path> -n <name>
+```
 
-new line
+## Deploy
+``` bash
+sls deploy 
+# Agregar --stage <stage_name>, por defecto es 'dev'
+```
 
-new line
+## Eliminar deploy
+``` bash
+sls remove
+```
 
-new line
-
-eder
+## Serverless offline
+instalar serverless offline
+``` bash
+npm i --save-dev serverless-offline
+```
+agregar en serverless.yml
+``` code
+plugins:
+    - serverless-offline
+```
+ejecutar
+``` bash
+sls offline
+```

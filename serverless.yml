@@ -3,102 +3,71 @@ service: serverless-banking
 frameworkVersion: '3'
 
 plugins:
-  - serverless-offline # primero instalar serverless-offline, con esto podemos deployar nuestra lambda de forma
-
+  - serverless-offline
 
 provider:
   name: aws
   runtime: nodejs12.x
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iam:
-#    role:
-#      statements:
-#        - Effect: "Allow"
-#          Action:
-#            - "s3:ListBucket"
-#          Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#        - Effect: "Allow"
-#          Action:
-#            - "s3:PutObject"
-#          Resource:
-#            Fn::Join:
-#              - ""
-#              - - "arn:aws:s3:::"
-#                - "Ref" : "ServerlessDeploymentBucket"
-#                - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  patterns:
-#    - '!exclude-me.js'
-#    - '!exclude-me-dir/**'
-#    - include-me.js
-#    - include-me-dir/**
-
-# Cada función-lambda hace referencia a una función expuesta
 functions:
-  hello: # nombre de la lambda
-    handler: handler.hello # archivo.función
+# User
+  userCreate:
+    handler: src/app/userHandler.create
     events:
       - http:
-          path: /hola-mundo/{name} # path url
-          method: get # method
-  greet:
-    handler: handler.greet
-    events:
-      - http:
-          path: /greet
+          path: /register
           method: post
-#      - websocket: $connect
-#      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
-#      - sns: greeter-topic
-#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-#      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx
-#      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
-#      - iot:
-#          sql: "SELECT * FROM 'some_topic'"
-#      - cloudwatchEvent:
-#          event:
-#            source:
-#              - "aws.ec2"
-#            detail-type:
-#              - "EC2 Instance State-change Notification"
-#            detail:
-#              state:
-#                - pending
-#      - cloudwatchLog: '/aws/lambda/hello'
-#      - cognitoUserPool:
-#          pool: MyUserPool
-#          trigger: PreSignUp
-#      - alb:
-#          listenerArn: arn:aws:elasticloadbalancing:us-east-1:XXXXXX:listener/app/my-load-balancer/50dc6c495c0c9188/
-#          priority: 1
-#          conditions:
-#            host: example.com
-#            path: /hello
+  userLogin:
+    handler: src/app/userHandler.login
+    events:
+      - http:
+          path: /login
+          method: post
+# Customer
+  customerCreate:
+    handler: src/app/customerHandler.create
+    events:
+      - http:
+          path: /customer
+          method: post
+  customerGet:
+    handler: src/app/customerHandler.get
+    events:
+      - http:
+          path: /customer/{id}
+          method: get         
+# Account
+  accountCreate:
+    handler: src/app/accountHandler.create
+    events:
+      - http:
+          path: /account
+          method: post
 
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
+  accountGetBalance:
+    handler: src/app/accountHandler.getBalance
+    events:
+      - http:
+          path: /account/{id}/balance
+          method: get
 
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+  accountLock:
+    handler: src/app/accountHandler.lock
+    events:
+      - http:
+          path: /account/{id}/lock
+          method: post
+          
+  accountUnlock:
+    handler: src/app/accountHandler.unlock
+    events:
+      - http:
+          path: /account/{id}/unlock
+          method: post 
+# Payment
+  paymentCreate:
+    handler: src/app/paymentHandler.create
+    events:
+      - http:
+          path: /payment
+          method: post 
