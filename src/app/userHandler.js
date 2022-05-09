@@ -1,6 +1,7 @@
 'use strict';
 
-const user = require('../service/user')
+const user = require('../service/userService')
+const context = require('../app/__context')
 
 var response = {
     statusCode: 200,
@@ -9,14 +10,13 @@ var response = {
 
 module.exports.create = async (event) => {
     try {
+        const ctx = context.GetContext()
         user.registerRequest = JSON.parse(event.body)
         if (!user.registerRequest) {
             throw new Error("error: user create: empty body")
         }
 
-        user.register(user.registerRequest)
 
-        return response
     } catch (error) {
         response.statusCode = 400
         response.body = error.message
@@ -26,12 +26,15 @@ module.exports.create = async (event) => {
 
 module.exports.login = async (event) => {
     try {
+        const ctx = context.GetContext()
         user.loginRequest = JSON.parse(event.body)
-        if (!body) {
+        if (!user.loginRequest) {
             throw new Error("error: user login: empty body")
         }
 
-        return response
+        let us = new user.UserService(new user)
+        us.login()
+
     } catch (error) {
         response.statusCode = 400
         response.body = error.message
