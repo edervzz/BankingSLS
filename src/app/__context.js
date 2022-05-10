@@ -1,11 +1,20 @@
 'use strict';
+class Context {
+    static IS_LOCAL = 'isLocalRepository'
 
-const IS_LOCAL = "isRepositoryStub"
-let ctx = new Map()
-
-module.exports.GetContext = () => {
-    if (!ctx.size) {
-        ctx.set(IS_LOCAL, process.env.IS_LOCAL)
+    constructor() {
+        this.ctx = new Map()
     }
-    return ctx
+
+    get() {
+        if (!ctx.size) {
+            ctx.set(IS_LOCAL, process.env.IS_LOCAL)
+        }
+        return ctx
+    }
+
 }
+
+module.exports.IS_LOCAL = IS_LOCAL
+module.exports.Context = Context
+

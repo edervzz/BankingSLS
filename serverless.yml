@@ -6,14 +6,13 @@ plugins:
   - serverless-offline
 
 custom:
-  local:
-    isLocal: true
+  isLocal: true
 
 provider:
   name: aws
   runtime: nodejs12.x
   environment:
-    IS_LOCAL: ${self:custom.${sls:stage}.isLocal}
+    IS_LOCAL: ${self:custom.isLocal}
 
 functions:
 # User

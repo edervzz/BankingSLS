@@ -1,35 +1,39 @@
 'use strict';
 
 const utils = require('../utils/utils')
-const user = require('../database/user')
+const user = require('../repository/userRepository')
 
 const response = { statusCode: 200, body: "" }
-const loginRequest = { username: "", password: "" }
+const loginRequest = { username: "", password: "", email: "" }
 const registerRequest = { username: "", password: "", email: "" }
 
-function UserService(u = new user.UserRepository()) {
-    let _user = u
-    this.register = async (_ctx = new Map(), req = loginRequest) => {
-        let r = { ...response }
+class UserService {
+    constructor(repo = new user.UserRepository(null)) {
+        this.repo = repo
+    }
 
-        if (!req.username || !req.password || !req.email) {
+    async register(request = registerRequest) {
+        if (!request.username || !request.password || !request.email) {
             throw new Error("error: register user: some data is empty")
         }
 
-        const hashed = await utils.hashPassword(req.password)
+        const hashed = await utils.hashPassword(request.password)
+        this.repo.create(request.username, hashed, request.email)
 
-        return r
+        return response
     }
 
-    this.login = async (req = loginRequest) => {
-        let r = { ...response }
-        if (!req.username || !req.password) {
+    async login(request = loginRequest) {
+        if (!request.username || !request.password) {
             throw new Error("error: login user: complete user and password")
         }
-        _user.find()
-        return r
+        const res = { ...response }
+        const result = this.repo.find(request.username, request.email)
+        res.body = JSON.stringify(result)
+        return res
     }
 }
+
 
 module.exports.reponse = response
 module.exports.loginRequest = loginRequest
