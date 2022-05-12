@@ -1,4 +1,4 @@
-# BankingSLS
+# BankingSLS (WIP)
 Serverless Banking App + JavaScript + Hexagonal Architecture
 ## Instalar serverless vía nodejs
 ``` bash
